@@ -1,0 +1,6 @@
+#!/bin/bash
+#power=`upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep -E "percentage" | awk '{print $2}'`
+state=`upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep -E "state" | awk '{print $2}'`
+time=`upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep -E "time" | awk '{print $4,$5}'`
+
+echo $power $state $time

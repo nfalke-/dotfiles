@@ -1,0 +1,2 @@
+#!/bin/bash
+sensors -f | grep hysic | awk '{print $4}'
