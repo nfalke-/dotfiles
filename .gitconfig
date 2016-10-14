@@ -1,0 +1,5 @@
+[user]
+	email = nate.falke@gmail.com
+	name = nate
+[push]
+	default = simple
