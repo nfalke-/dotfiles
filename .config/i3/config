@@ -1,5 +1,20 @@
 set $mod Mod1
 font pango:System San Francisco Display 9
+new_window 1pixel
+
+
+set $bg-color            #000000
+set $inactive-bg-color   #000000
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+
+# window colors
+#                       border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          #00ff00
+client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -7,7 +22,8 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+space exec rofi -show run -lines 3 -eh 2 -width 100 -padding 450 -opacity "75" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
+bindsym $mod+space exec rofi -show run  -lines 3 -eh 2 -width 100 -padding 450 -opacity "75" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#555555" -font "System San Francisco Display 18"
+bindsym $mod+Tab exec rofi -show window -lines 3 -eh 2 -width 100 -padding 450 -opacity "75" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
@@ -34,8 +50,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split 
-bindsym $mod+c split h
-bindsym $mod+v split v
+#bindsym $mod+c split h
+#bindsym $mod+v split v
 
 # enter fullscreen mode 
 bindsym $mod+f fullscreen toggle
@@ -47,14 +63,6 @@ bindsym $mod+e layout toggle
 
 # toggle tiling / floating
 #bindsym $mod+Shift+space floating toggle
-
-#################################################
-#pianobar
-#################################################
-
-bindsym $mod+n exec "echo n >> ~/.config/pianobar/ctl"
-bindsym $mod+p exec "echo ' ' >> ~/.config/pianobar/ctl"
-
 
 
 
@@ -84,6 +92,8 @@ bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace10
+bindsym Control+$mod+Right workspace next
+bindsym Control+$mod+Left workspace prev
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1; workspace $workspace1
@@ -96,6 +106,8 @@ bindsym $mod+Shift+7 move container to workspace $workspace7; workspace $workspa
 bindsym $mod+Shift+8 move container to workspace $workspace8; workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9; workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10; workspace $workspace10
+bindsym Control+Shift+$mod+Right move container to workspace next; workspace next
+bindsym Control+Shift+$mod+Left move container to workspace prev; workspace prev
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
@@ -115,6 +127,27 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+# resize window (you can also use the mouse for that)
+mode "pianobar" {
+    bindsym $mod+p [instance="pianobarTerminal"] scratchpad show; mode "default"
+    bindsym $mod+shift+p exec --no-startup-id i3-sensible-terminal -p pianobarTerminal --classname="pianobarTerminal"; mode "default"
+    bindsym n exec "echo n >> .config/pianobar/ctl"; mode "default"
+    bindsym p exec "echo p >> .config/pianobar/ctl"; mode "default"
+    bindsym 9 exec "echo s9 >> .config/pianobar/ctl"; mode "default"
+    bindsym 3 exec "echo s3 >> .config/pianobar/ctl"; mode "default"
+    bindsym p exec "echo p >> .config/pianobar/ctl"; mode "default"
+    bindsym p exec "echo p >> .config/pianobar/ctl"; mode "default"
+    bindsym space exec "echo p >> .config/pianobar/ctl"; mode "default"
+    bindsym minus exec "echo - >> .config/pianobar/ctl"; mode "default"
+    bindsym plus exec "echo + >> .config/pianobar/ctl"; mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+p mode "pianobar"
+
+
 # bar
 bar {
     status_command i3blocks -c /home/nate/.config/i3/i3blocks.conf
@@ -130,45 +163,33 @@ bar {
     tray_output primary
 }
 
+bindsym --release $mod+c exec scrot -se 'mv $f ~/Pictures'
+
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
- 
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
-new_window 1pixel
-
-# resize mode
-
-set $bg-color            #2f343f
-set $inactive-bg-color   #2f343f
-set $text-color          #f3f4f5
-set $inactive-text-color #676E7D
-set $urgent-bg-color     #E53935
-
-# window colors
-#                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #00ff00
-client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
 
 bindsym $mod+minus scratchpad show
 bindsym $mod+shift+minus move scratchpad
 
+for_window[instance="gsimplecal"] move position 800px 21px;
+
 ###################################################################################################
 # Quick terminal
 ###################################################################################################
-# startup of the hidden terminal "metask"
-exec --no-startup-id i3-sensible-terminal --classname="pianobarTerminal" --command="pianobar"
-# start it up if close the workspace (mod+q)
-# the actual conf for the dropdown terminal size
+#right
+exec --no-startup-id i3-sensible-terminal -p pianobarTerminal --classname="pianobarTerminal" 
 for_window [instance="pianobarTerminal"] move scratchpad; [instance="pianobarTerminal"] scratchpad show; resize set 600 1060; move position 1320px 20px; move scratchpad
-# bind mod+o key to show (add yours)
-bindsym $mod+o [instance="pianobarTerminal"] scratchpad show
 
-
-exec --no-startup-id i3-sensible-terminal --classname="topTerminal"
+#top
+exec --no-startup-id i3-sensible-terminal -p topTerminal --classname="topTerminal"
 for_window [instance="topTerminal"] move scratchpad; [instance="topTerminal"] scratchpad show; resize set 1920 500; move position 0px 20px; move scratchpad
 bindsym $mod+i [instance="topTerminal"] scratchpad show
+bindsym $mod+shift+i exec --no-startup-id i3-sensible-terminal -p topTerminal --classname="topTerminal"
+exec_always "xmodmap /home/nate/.config/i3/keyboard.xmodmap"
 
 exec_always synclient MaxTapTime=0
 exec compton --config ~/.config/compton.conf -b
-exec i3-sensible-terminal
+
+exec --no-startup-id i3-msg 'workspace $workspace1; exec i3-sensible-terminal'
+#exec_always --no-startup-id i3-msg 'workspace $workspace2; exec google-chrome'
+

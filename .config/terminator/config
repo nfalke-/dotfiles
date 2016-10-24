@@ -11,4 +11,33 @@
 [plugins]
 [profiles]
   [[default]]
+    background_image = None
     show_titlebar = False
+    palette = "#000000:#811811:#247720:#bbbb00:#0000bb:#751e75:#126d6c:#bbbbbb:#555555:#894e4e:#55ff55:#ffff55:#5555ff:#c44fc6:#55ffff:#ffffff"
+    foreground_color = "#000000"
+    background_color = "#929292"
+    cursor_color = "#000000"
+  [[pianobarTerminal]]
+    background_darkness = 0.9
+    background_image = None
+    background_type = transparent
+    custom_command = pianobar
+    icon_bell = False
+    scrollbar_position = hidden
+    show_titlebar = False
+    update_records = False
+    use_custom_command = True
+    palette = "#000000:#811811:#247720:#bbbb00:#0000bb:#751e75:#126d6c:#bbbbbb:#555555:#894e4e:#55ff55:#ffff55:#5555ff:#c44fc6:#55ffff:#ffffff"
+    foreground_color = "#000000"
+    background_color = "#929292"
+    cursor_color = "#000000"
+  [[topTerminal]]
+    background_darkness = 0.8
+    background_image = None
+    background_type = transparent
+    scrollbar_position = hidden
+    show_titlebar = False
+    palette = "#000000:#811811:#247720:#bbbb00:#0000bb:#751e75:#126d6c:#bbbbbb:#555555:#894e4e:#55ff55:#ffff55:#5555ff:#c44fc6:#55ffff:#ffffff"
+    foreground_color = "#000000"
+    background_color = "#929292"
+    cursor_color = "#000000"

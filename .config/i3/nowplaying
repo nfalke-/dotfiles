@@ -4,6 +4,6 @@ if pgrep "pianobar" > /dev/null
 then
     cat ~/.config/pianobar/nowplaying
 else
-    echo ""
+    echo " "
 fi
 
