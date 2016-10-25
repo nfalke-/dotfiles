@@ -1,0 +1,8 @@
+alias vi='vim'
+alias edit='vim'
+alias .b='edit ~/.bashrc; . .bashrc;'
+alias .v='edit ~/.vimrc'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias lsa='ls -a'
+alias please='sudo $(fc -ln -1)'
